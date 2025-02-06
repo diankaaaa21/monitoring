@@ -9,23 +9,14 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - SECRET_KEY=${SECRET_KEY}
-        - MYSQL_DATABASE=${MYSQL_DATABASE}
-        - MYSQL_USER=${MYSQL_USER}
-        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-        - DB_HOST=db
-        - DB_PORT=${DB_PORT}
-        - MACHINE_ID=${MACHINE_ID}
+      - config.env
     depends_on:
       - db
   db:
     image: mysql:8.0
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      - config.env
     ports:
       - "3306:3306"
     volumes:
