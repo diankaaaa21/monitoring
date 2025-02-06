@@ -19,13 +19,13 @@ This project is a **Django-based application** for monitoring and collecting met
 
 ### 1. **Clone the Repository**
 ```sh
-git clone https://github.com/yourusername/Django-Metrics-API.git
+git clone https://github.com/diankaaaa21/monitoring.git
 cd Django-Metrics-API
 ```
 
 ### 2. **Create Configuration File**
 ```sh
-cp .env.example .env
+cp  config.env
 ```
 Edit `.env` and specify the database connection parameters.
 
