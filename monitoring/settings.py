@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -39,8 +40,8 @@ INSTALLED_APPS = [
     "metrics",
     "rest_framework",
     "django.contrib.contenttypes",
-    'django.contrib.auth',
-    'django.contrib.staticfiles'
+    "django.contrib.auth",
+    "django.contrib.staticfiles",
 ]
 
 MIDDLEWARE = [
@@ -84,7 +85,7 @@ DATABASES = {
         "USER": os.getenv("MYSQL_USER"),
         "PASSWORD": os.getenv("MYSQL_ROOT_PASSWORD"),
         "HOST": os.getenv("DB_HOST"),
-        "PORT": os.getenv("DB_PORT", "3306")
+        "PORT": os.getenv("DB_PORT", "3306"),
     }
 }
 

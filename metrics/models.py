@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class SystemMetrics(models.Model):
     machine_id = models.CharField(max_length=50)
     cpu = models.IntegerField()
@@ -7,6 +8,7 @@ class SystemMetrics(models.Model):
     disk = models.CharField(max_length=10)
     uptime = models.CharField(max_length=50)
     timestamp = models.DateTimeField(auto_now_add=True)
+
 
 class Incident(models.Model):
     machine_id = models.CharField(max_length=50)
