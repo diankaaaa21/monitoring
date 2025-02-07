@@ -20,7 +20,7 @@ This project is a **Django-based application** for monitoring and collecting met
 ### 1. **Clone the Repository**
 ```sh
 git clone https://github.com/diankaaaa21/monitoring.git
-cd Django-Metrics-API
+cd monitoring
 ```
 
 ### 2. **Create Configuration File**
