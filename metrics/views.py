@@ -6,5 +6,8 @@ from .models import Incident
 
 @api_view(["GET"])
 def get_incidents(request):
-    incidents = Incident.objects.all().order_by("-timestamp").values()
-    return Response({"incidents": list(incidents)})
+    try:
+        incidents = Incident.objects.all().values()
+        return Response({"incidents": list(incidents)})
+    except Exception as e:
+        return Response({"error": str(e)}, status=500)

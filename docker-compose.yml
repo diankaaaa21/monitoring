@@ -3,20 +3,18 @@ services:
   web:
     build: .
     command: >
-      /bin/sh -c "while ! mysqladmin ping -h db --silent; do sleep 1; done; python manage.py migrate"
+      sh -c "./wait-for-it.sh db:3306 -- python manage.py migrate && gunicorn project.wsgi:application --bind 0.0.0.0:8000"
     volumes:
       - .:/app
     ports:
       - "8000:8000"
-    environment:
-      - config.env
+    env_file: .env
     depends_on:
       - db
   db:
     image: mysql:8.0
     restart: always
-    environment:
-      - config.env
+    env_file: .env
     ports:
       - "3306:3306"
     volumes:
