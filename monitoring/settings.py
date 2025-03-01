@@ -17,6 +17,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+IS_GITHUB_CI = os.getenv("GITHUB_ACTIONS") == "true"
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -75,7 +76,7 @@ DATABASES = {
         "NAME": os.getenv("MYSQL_DATABASE"),
         "USER": os.getenv("MYSQL_USER"),
         "PASSWORD": os.getenv("MYSQL_ROOT_PASSWORD"),
-        "HOST": os.getenv("DB_HOST", "db"),
+        "HOST": 'localhost' if IS_GITHUB_CI else os.getenv("DB_HOST", "db"),
         "PORT": os.getenv("DB_PORT", "3306"),
     }
 }

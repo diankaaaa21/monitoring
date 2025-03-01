@@ -52,6 +52,7 @@ jobs:
 
     - name: Run migrations
       env:
+        GITHUB_ACTIONS: true
         MYSQL_HOST: 127.0.0.1
         MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
         MYSQL_USER: ${{ secrets.MYSQL_USER }}
