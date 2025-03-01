@@ -76,7 +76,7 @@ DATABASES = {
         "NAME": os.getenv("MYSQL_DATABASE"),
         "USER": os.getenv("MYSQL_USER"),
         "PASSWORD": os.getenv("MYSQL_ROOT_PASSWORD"),
-        "HOST": 'localhost' if IS_GITHUB_CI else os.getenv("DB_HOST", "db"),
+        "HOST": "localhost" if IS_GITHUB_CI else os.getenv("DB_HOST", "db"),
         "PORT": os.getenv("DB_PORT", "3306"),
     }
 }
