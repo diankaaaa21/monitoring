@@ -24,14 +24,18 @@ cd monitoring
 
 ### 2. **Create Configuration File**
 ```sh
-cp  config.env
-# Open file .env and specify the database connection parameters:
-# MYSQL_DATABASE=your_database
-# MYSQL_USER=your_user
-# MYSQL_PASSWORD=your_password
-# DB_HOST=db
+🛠 Example .env File
+
+Create a `.env` file in the project root:
+
+```ini
+MYSQL_DATABASE=monitoring
+MYSQL_USER=root
+MYSQL_PASSWORD=yourpassword
+DB_HOST=db
+DEBUG=True
+SECRET_KEY=your_secret_key
 ```
-Edit `.env` and specify the database connection parameters.
 
 ### 3. **Run the Project with Docker**
 ```sh
