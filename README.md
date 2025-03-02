@@ -5,7 +5,6 @@ This project is a **Django-based application** for monitoring and collecting met
 ## 📌 Features
 - REST API for collecting and retrieving metrics.
 - MySQL database for data storage.
-- Logging and error handling for stability.
 - Containerization with Docker.
 - Configuration management via `.env`.
 
@@ -50,7 +49,6 @@ python manage.py runserver
 - `models.py` — Database models.
 - `views.py` — API logic.
 - `urls.py` — API routing.
-- `admin.py` — Admin panel configuration.
 - `metrics.py` & `monitor.py` — Monitoring services.
 - `Dockerfile` & `docker-compose.yml` — Containerization files.
 - `requirements.txt` — Project dependencies.
