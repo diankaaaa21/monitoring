@@ -82,13 +82,10 @@ pytest
 ```
 
 Run tests inside a Docker container:
+```sh
 Find the container ID:
-```sh
-bash
 docker ps
-```
 Then run:
-```sh
 docker exec -it <container_id> pytest
 ```
 
