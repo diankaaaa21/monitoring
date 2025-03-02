@@ -25,6 +25,11 @@ cd monitoring
 ### 2. **Create Configuration File**
 ```sh
 cp  config.env
+# Open file .env and specify the database connection parameters:
+# MYSQL_DATABASE=your_database
+# MYSQL_USER=your_user
+# MYSQL_PASSWORD=your_password
+# DB_HOST=db
 ```
 Edit `.env` and specify the database connection parameters.
 
@@ -77,13 +82,25 @@ pytest
 ```
 
 Run tests inside a Docker container:
+Find the container ID:
+```sh
+bash
+docker ps
+```
+Then run:
 ```sh
 docker exec -it <container_id> pytest
 ```
 
 Example API request using `curl`:
 ```sh
-curl -X GET http://localhost:8000/api/metrics/
+curl -X POST http://localhost:8000/api/metrics/ -H "Content-Type: application/json" -d '{
+  "machine_id": "server-1",
+  "cpu": 75,
+  "mem": "60%",
+  "disk": "45%",
+  "uptime": "2 days"
+}'
 ```
 
 ## 📜 License
