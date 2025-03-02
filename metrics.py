@@ -9,7 +9,7 @@ load_dotenv()
 DB_CONFIG = {
     "host": os.getenv("DB_HOST"),
     "user": os.getenv("MYSQL_USER"),
-    "password": os.getenv("MYSQL_ROOT_PASSWORD"),
+    "password": os.getenv("MYSQL_PASSWORD"),
     "database": os.getenv("MYSQL_DATABASE"),
 }
 
