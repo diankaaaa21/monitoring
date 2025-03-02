@@ -13,7 +13,7 @@ This project is a **Django-based application** for monitoring and collecting met
 - **Framework:** Django, Django REST Framework
 - **Database:** MySQL
 - **Containerization:** Docker, Docker Compose
-- **DevOps:** dotenv, Gunicorn, logging
+- **DevOps:** dotenv, Gunicorn
 
 ## 📂 Installation and Setup
 
@@ -59,7 +59,7 @@ python manage.py runserver
 ## 🚀 Running and Testing
 API will be accessible at:
 ```sh
-http://localhost:8000/api/
+http://localhost:8000/api/incidents/
 ```
 
 ### **API Documentation**
