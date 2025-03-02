@@ -17,3 +17,4 @@ COPY . .
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "monitoring.wsgi:application"]
 
 
+
