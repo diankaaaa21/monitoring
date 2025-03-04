@@ -5,7 +5,6 @@ This project is a **Django-based application** for monitoring and collecting met
 ## 📌 Features
 - REST API for collecting and retrieving metrics.
 - MySQL database for data storage.
-- Logging and error handling for stability.
 - Containerization with Docker.
 - Configuration management via `.env`.
 
@@ -13,7 +12,7 @@ This project is a **Django-based application** for monitoring and collecting met
 - **Framework:** Django, Django REST Framework
 - **Database:** MySQL
 - **Containerization:** Docker, Docker Compose
-- **DevOps:** dotenv, Gunicorn, logging
+- **DevOps:** dotenv, Gunicorn
 
 ## 📂 Installation and Setup
 
@@ -25,9 +24,18 @@ cd monitoring
 
 ### 2. **Create Configuration File**
 ```sh
-cp  config.env
+🛠 Example .env File
+
+Create a `.env` file in the project root:
+
+```ini
+MYSQL_DATABASE=monitoring
+MYSQL_USER=root
+MYSQL_PASSWORD=yourpassword
+DB_HOST=db
+DEBUG=True
+SECRET_KEY=your_secret_key
 ```
-Edit `.env` and specify the database connection parameters.
 
 ### 3. **Run the Project with Docker**
 ```sh
@@ -50,7 +58,6 @@ python manage.py runserver
 - `models.py` — Database models.
 - `views.py` — API logic.
 - `urls.py` — API routing.
-- `admin.py` — Admin panel configuration.
 - `metrics.py` & `monitor.py` — Monitoring services.
 - `Dockerfile` & `docker-compose.yml` — Containerization files.
 - `requirements.txt` — Project dependencies.
@@ -59,7 +66,7 @@ python manage.py runserver
 ## 🚀 Running and Testing
 API will be accessible at:
 ```sh
-http://localhost:8000/api/
+http://localhost:8000/api/incidents/
 ```
 
 ### **API Documentation**
@@ -80,12 +87,23 @@ pytest
 
 Run tests inside a Docker container:
 ```sh
+Find the container ID:
+```bash
+docker ps
+Then run:
+```bash
 docker exec -it <container_id> pytest
 ```
 
 Example API request using `curl`:
 ```sh
-curl -X GET http://localhost:8000/api/metrics/
+curl -X POST http://localhost:8000/api/metrics/ -H "Content-Type: application/json" -d '{
+  "machine_id": "server-1",
+  "cpu": 75,
+  "mem": "60%",
+  "disk": "45%",
+  "uptime": "2 days"
+}'
 ```
 
 ## 📜 License
