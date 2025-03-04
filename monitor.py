@@ -1,48 +1,49 @@
-# import datetime
-# import os
-# import time
-#
-# import mysql.connector
-# from dotenv import load_dotenv
-#
-# load_dotenv()
-#
-# DB_CONFIG = {
-#     "host": os.getenv("DB_HOST"),
-#     "user": os.getenv("MYSQL_USER"),
-#     "password": os.getenv("MYSQL_PASSWORD"),
-#     "database": os.getenv("MYSQL_DATABASE"),
-#     "port": os.getenv("DB_PORT", "3306"),
-# }
-#
-# THRESHOLDS = {"cpu": 85, "mem": 90, "disk": 95}
-#
-#
-# def check_incidents():
-#     conn = mysql.connector.connect(**DB_CONFIG)
-#     cursor = conn.cursor(dictionary=True)
-#
-#     query = "SELECT * FROM metrics_systemmetrics ORDER BY timestamp DESC LIMIT 30"
-#     cursor.execute(query)
-#     metrics = cursor.fetchall()
-#
-#     for metric in metrics:
-#         for param, limit in THRESHOLDS.items():
-#             value = int(metric[param].strip("%"))
-#             if value > limit:
-#                 cursor.execute(
-#                     """
-#                     INSERT INTO metrics_incident (machine_id, parameter, value, threshold, duration)
-#                     VALUES (%s, %s, %s, %s, 30)
-#                 """,
-#                     (metric["machine_id"], param, value, limit),
-#                 )
-#
-#     conn.commit()
-#     cursor.close()
-#     conn.close()
-#
-#
-# while True:
-#     check_incidents()
-#     time.sleep(900)
+import os
+import time
+
+import django
+from django.utils import timezone
+from dotenv import load_dotenv
+
+# Загрузка настроек Django
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "monitoring.settings")
+django.setup()
+
+from metrics.models import SystemMetrics
+from metrics.services.data_fetcher import fetch_metrics
+from metrics.services.incident_checker import check_incidents
+
+load_dotenv()
+
+DB_CONFIG = {
+    "host": os.getenv("DB_HOST"),
+    "user": os.getenv("MYSQL_USER"),
+    "password": os.getenv("MYSQL_PASSWORD"),
+    "database": os.getenv("MYSQL_DATABASE"),
+}
+
+
+def save_to_db(machine_id, data):
+
+    SystemMetrics.objects.create(
+        machine_id=machine_id,
+        cpu=data["cpu"],
+        mem=data["mem"],
+        disk=data["disk"],
+        uptime=data["uptime"],
+        timestamp=timezone.now(),
+    )
+
+
+def monitor():
+    while True:
+        for machine_id in range(1, 31):
+            metrics = fetch_metrics(machine_id)
+            if metrics:
+                save_to_db(machine_id, metrics)
+        check_incidents()
+        time.sleep(900)
+
+
+if __name__ == "__main__":
+    monitor()

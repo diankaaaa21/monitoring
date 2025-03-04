@@ -1,7 +1,7 @@
 from django.urls import path
 
-from .views import get_incidents
+from .views import incident_list
 
 urlpatterns = [
-    path("api/incidents/", get_incidents, name="get_incidents"),
+    path("incidents/", incident_list, name="incident_list"),
 ]

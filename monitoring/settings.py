@@ -21,6 +21,7 @@ IS_GITHUB_CI = os.getenv("GITHUB_ACTIONS") == "true"
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+LOGIN_URL = "/admin/login/"
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 
@@ -31,12 +32,16 @@ ALLOWED_HOSTS = []
 
 
 INSTALLED_APPS = [
-    "monitor",
-    "metrics",
-    "rest_framework",
-    "django.contrib.contenttypes",
+    "django.contrib.admin",
     "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
+    "metrics",
+    "mock_api",
+    "monitoring",
 ]
 
 MIDDLEWARE = [
@@ -45,6 +50,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "metrics.middleware.LoginRequiredMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -76,7 +82,7 @@ DATABASES = {
         "NAME": os.getenv("MYSQL_DATABASE"),
         "USER": os.getenv("MYSQL_USER"),
         "PASSWORD": os.getenv("MYSQL_PASSWORD"),
-        "HOST": "localhost" if IS_GITHUB_CI else os.getenv("DB_HOST", "db"),
+        "HOST": "db",
         "PORT": os.getenv("DB_PORT", "3306"),
     }
 }

@@ -1,13 +1,10 @@
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import Incident
 
 
-@api_view(["GET"])
-def get_incidents(request):
-    try:
-        incidents = Incident.objects.all().values()
-        return Response({"incidents": list(incidents)})
-    except Exception as e:
-        return Response({"error": str(e)}, status=500)
+@csrf_exempt
+def incident_list(request):
+    incidents = Incident.objects.order_by("-timestamp")[:50].values()
+    return render(request, "metrics/incident_list.html", {"incidents": incidents})
