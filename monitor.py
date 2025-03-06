@@ -5,7 +5,6 @@ import django
 from django.utils import timezone
 from dotenv import load_dotenv
 
-# Загрузка настроек Django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "monitoring.settings")
 django.setup()
 
