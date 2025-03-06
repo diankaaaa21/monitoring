@@ -9,6 +9,8 @@ class SystemMetrics(models.Model):
     uptime = models.CharField(max_length=50)
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    objects = models.Manager()
+
     class Meta:
         db_table = "metrics_systemmetrics"
 
@@ -20,6 +22,8 @@ class Incident(models.Model):
     threshold = models.CharField(max_length=10)
     duration = models.IntegerField()
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    objects = models.Manager()
 
     class Meta:
         db_table = "metrics_incident"
